@@ -248,7 +248,7 @@ def data_ingestion_pagarme():
 
     for account in accounts:
 
-        for endpoint, extraction_info in endpoints:
+        for endpoint, extraction_info in endpoints.items():
             df_schema = data_schemas[endpoint]
             date_column = extraction_info["date_column"]
 
