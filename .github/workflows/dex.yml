@@ -26,7 +26,7 @@ jobs:
     env:
       DEXCTL_SCHEDULER_MWAA_AWS_ACCESS_KEY: "${{ secrets.MWAA_DAG_AUTOMATION_ACCESS_KEY }}"
       DEXCTL_SCHEDULER_MWAA_AWS_SECRET_KEY: "${{ secrets.MWAA_DAG_AUTOMATION_SECRET_KEY }}"
-    
+    if: ${{ hashFiles('models/') != '' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
