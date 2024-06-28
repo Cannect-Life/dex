@@ -31,7 +31,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      # Check if 'models' directory has any files
+      - name: Check if models directory exists and is not empty
+        id: check-dir
+        run: |
+          if [[! -d "models" || "$(ls -A models)" == "" ]]; then
+            echo "::set-output name=empty::true"
+          else
+            echo "::set-output name=empty::false"
+          fi
       - name: Update Dags
+        if: steps.check-dir.outputs.empty == 'false'
         uses: docker://us-east1-docker.pkg.dev/dex-apps-prod/dexctl/dexctl:v0.6.5
         with:
           args: dexctl sched update --api-key ${{ secrets.DEX_API_KEY }}
