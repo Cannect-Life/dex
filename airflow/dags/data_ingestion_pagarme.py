@@ -115,6 +115,8 @@ data_schemas = {
         "pix_qr_code": str,
         "pix_expiration_date": "date",
         "service_referer_name": str,
+        "partition_date": str,
+        "account": str
     },
     "refunds": {
         "object": str,
@@ -131,6 +133,8 @@ data_schemas = {
         "date_created": "date",
         "date_updated": "date",
         "metadata": str,
+        "partition_date": str,
+        "account": str
     },
     "payables": {
         "object": str,
@@ -155,6 +159,8 @@ data_schemas = {
         "accrual_date": "date",
         "date_created": "date",
         "liquidation_arrangement_id": str,
+        "partition_date": str,
+        "account": str
     },
     "customers": {
         "object": str,
@@ -176,6 +182,8 @@ data_schemas = {
         "phones": str,
         "client_since": str,
         "risk_indicator": str,
+        "partition_date": str,
+        "account": str
     },
     "chargebacks": {
         "object": str,
@@ -192,6 +200,8 @@ data_schemas = {
         "accrual_date": "date",
         "status": str,
         "cycle": int,
+        "partition_date": str,
+        "account": str
     },
 }
 
@@ -349,6 +359,10 @@ def data_ingestion_pagarme():
 
             @task(task_id=f"treat_data_{account}_{endpoint}")
             def treat_data(data, **kwargs):
+
+                if len(data) == 0:
+                    return pd.DataFrame()
+                    
                 df = pd.DataFrame(data)
 
                 df = apply_data_types(df, kwargs["df_schema"])
