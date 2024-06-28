@@ -1,0 +1,42 @@
+version: 1
+
+scheduler:
+  mwaa:
+    account_id: 601697184715
+    bucket_name: cannect-mwaa-dags-1f97943d
+    bucket_region: us-east-2
+  config:
+    vars:
+      credential_var: DEX_SERVER_API_KEY
+    dags:
+      - name: platform_default
+        rules: ["daily"]
+        start_date: datetime.now() - timedelta(days=2)
+        schedule_interval: "@daily"
+        retries: 1
+        notify:
+          - when: on_task_failure
+            slack:
+              connection_id: slack_connection_id
+      - name: test_pipeline
+        rules: ["hourly"]
+        start_date: datetime.now() - timedelta(days=2)
+        schedule_interval: "@hourly"
+        retries: 1
+        tags: [product]
+        downstream: true
+      - name: internal_pipeline
+        start_date: datetime.now() - timedelta(days=2)
+        schedule_interval: "@hourly"
+        retries: 1
+        tags: [internal]
+        upstream: true
+      - name: daily_test_pipeline
+        start_date: datetime.now() - timedelta(days=2)
+        schedule_interval: "@daily"
+        retries: 1
+        tags: [internal]
+        upstream: true
+dex:
+  url: https://api.dexlabs.io
+  workspace: efe1a4dc-16db-4dc8-9ec6-0c1411b78de1
