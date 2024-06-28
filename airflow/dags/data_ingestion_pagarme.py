@@ -377,21 +377,17 @@ def data_ingestion_pagarme():
 
                 df = apply_data_types(df, kwargs["df_schema"])
 
-                partition_column = kwargs.get("partition_column")
-                if partition_column:
-                    if partition_column == "_ingestion_date_":
-                        df["partition_date"] = kwargs["ingestion_date"]
-                    else:
-                        def get_date_str(col_value):
-                            if isinstance(col_value, str):
-                                col_value = date_parse(col_value)
-                            return str(col_value.date())
-                            
-                        df["partition_date"] = df[partition_column].apply(get_date_str)
+                partition_column = kwargs.get("partition_date_column")
+                
+                if partition_column == "_ingestion_date_":
+                    df["partition_date"] = kwargs["ingestion_date"]
                 else:
-                    df["partition_date"] = df[kwargs["partition_date_column"]].apply(
-                        lambda d: str(d.date())
-                    )
+                    def get_date_str(col_value):
+                        if isinstance(col_value, str):
+                            col_value = date_parse(col_value)
+                        return str(col_value.date())
+                        
+                    df["partition_date"] = df[partition_column].apply(get_date_str)
 
                 df["account"] = kwargs["account"]
 
