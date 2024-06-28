@@ -382,12 +382,16 @@ def data_ingestion_pagarme():
                 from airflow.providers.amazon.aws.hooks.base_aws import AwsBaseHook
 
                 aws_hook = AwsBaseHook(aws_connection, client_type="sts")
-
-                client = aws_hook.get_conn()
-
-                credentials = aws_hook.get_credentials()
-                access_key = credentials.access_key
-                secret_key = credentials.secret_key
+                sts_client = aws_hook.get_conn()
+                assumed_role = sts_client.assume_role(
+                    RoleArn="arn:aws:iam::094506792271:role/deXAutomationRole",
+                    RoleSessionName='cannect_session'
+                )
+                
+                credentials = assumed_role['Credentials']
+                access_key = credentials['AccessKeyId']
+                secret_key = credentials['SecretAccessKey']
+                session_token = credentials['SessionToken']
 
                 s3_path = f"{LANDING_PATH}/{endpoint}/"
 
@@ -398,7 +402,7 @@ def data_ingestion_pagarme():
                     return
 
                 s3_filesystem = pafs.S3FileSystem(
-                    region="us-east-1", access_key=access_key, secret_key=secret_key
+                    region="us-east-1", access_key=access_key, secret_key=secret_key, session_token=session_token
                 )
 
                 type_map = {
