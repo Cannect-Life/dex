@@ -227,16 +227,14 @@ def treat_str_columns(col_value):
 
 def apply_data_types(df, df_schema):
 
-    
-
     for column, dtype in df_schema.items():
-
-        original_dtype = df[column].dtype
 
         if column not in df.columns:
             df[column] = None
         else:
             df[column] = df[column].apply(lambda x: treat_nulls(x))
+
+        original_dtype = df[column].dtype
 
         if dtype == str:
             df[column] = df[column].apply(treat_str_columns)
