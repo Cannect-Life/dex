@@ -206,6 +206,14 @@ data_schemas = {
 }
 
 
+def treat_nulls(col_value):
+    if isinstance(col_value, (dict, list)):
+        return col_value
+    if pd.isnull(col_value):
+        return None
+    return col_value
+    
+
 def treat_str_columns(col_value):
 
     if isinstance(col_value, (dict, list)):
@@ -219,6 +227,8 @@ def treat_str_columns(col_value):
 
 def apply_data_types(df, df_schema):
 
+    
+
     for column, dtype in df_schema.items():
 
         original_dtype = df[column].dtype
@@ -226,7 +236,7 @@ def apply_data_types(df, df_schema):
         if column not in df.columns:
             df[column] = None
         else:
-            df[column] = df[column].apply(lambda x: x if not pd.isnull(x) else None)
+            df[column] = df[column].apply(lambda x: treat_nulls(x))
 
         if dtype == str:
             df[column] = df[column].apply(treat_str_columns)
