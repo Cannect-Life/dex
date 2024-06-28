@@ -35,10 +35,11 @@ endpoints = {
     "payables": {
         "date_column": "updated_at",  # created_at
         "params_str": "{date_column}=>={date_start_int}&{date_column}=<{date_end_int}",
+        "partition_column": "_ingestion_date_"
     },
     "customers": {
-        "date_column": "created_at",  # updated_at is NOT available
-        "params_str": "{date_column}=>={date_start}&{date_column}=<{date_end}",
+        "date_column": "date_created",  # date_updated is NOT available
+        "params_str": "{date_column}=>={date_start}&{date_column}=<{date_end}"
     },
     "chargebacks": {
         "date_column": "updated_at",  # created_at
@@ -269,6 +270,7 @@ def data_ingestion_pagarme():
         for endpoint, extraction_info in endpoints.items():
             df_schema = data_schemas[endpoint]
             date_column = extraction_info["date_column"]
+            partition_column = extraction_info.get("partition_column", date_column)
 
             @task(task_id=f"extract_data_{account}_{endpoint}")
             def extract_data(
@@ -375,9 +377,21 @@ def data_ingestion_pagarme():
 
                 df = apply_data_types(df, kwargs["df_schema"])
 
-                df["partition_date"] = df[kwargs["partition_date_column"]].apply(
-                    lambda d: str(d.date())
-                )
+                partition_column = kwargs.get("partition_column")
+                if partition_column:
+                    if partition_column == "_ingestion_date_":
+                        df["partition_date"] = kwargs["ingestion_date"]
+                    else:
+                        def get_date_str(col_value):
+                            if isinstance(col_value, str):
+                                col_value = date_parse(col_value)
+                            return str(col_value.date())
+                            
+                        df["partition_date"] = df[partition_column].apply(get_date_str)
+                else:
+                    df["partition_date"] = df[kwargs["partition_date_column"]].apply(
+                        lambda d: str(d.date())
+                    )
 
                 df["account"] = kwargs["account"]
 
@@ -458,7 +472,8 @@ def data_ingestion_pagarme():
                 data=data,
                 df_schema=df_schema,
                 account=account,
-                partition_date_column=date_column,
+                partition_date_column=partition_column,
+                ingestion_date="{{ (logical_date + macros.timedelta(days=1)).strftime('%Y-%m-%dT%H:%M:%S.%fZ') }}"
             )
 
             write_data(
