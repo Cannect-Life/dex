@@ -153,4 +153,4 @@ jobs:
 
       - name: Update MWAA Environment
         run: |
-          aws mwaa update-environment --name ${{ env.MWAA_ENV_NAME }} --source-bucket-arn "arn:aws:s3:::${{ secrets.S3_BUCKET }}" --plugins-s3-object-version ${{ steps.plugins_version.outputs.plugins_version }} --requirements-s3-object-version ${{ steps.req_version.outputs.req_version }}
+          aws mwaa update-environment --name ${{ vars.MWAA_ENV_NAME }} --source-bucket-arn "arn:aws:s3:::${{ secrets.S3_BUCKET }}" --plugins-s3-object-version ${{ steps.plugins_version.outputs.plugins_version }} --requirements-s3-object-version ${{ steps.req_version.outputs.req_version }}
