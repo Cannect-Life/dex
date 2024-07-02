@@ -10,6 +10,1054 @@ sources:
     database: awsdatacatalog
     schema: landing
     tables:
+      - name: cn_brands
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: drops_per_milliliter
+            data_type: double
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: distributor_id
+            data_type: bigint
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_items
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: amount
+            data_type: double
+            description: ""
+          - name: quantity
+            data_type: bigint
+            description: ""
+          - name: fedex_awb_id
+            data_type: bigint
+            description: ""
+          - name: discount
+            data_type: double
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: promotion_id
+            data_type: bigint
+            description: ""
+          - name: unit_price
+            data_type: double
+            description: ""
+          - name: discount_type
+            data_type: string
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: imputed_value
+            data_type: double
+            description: ""
+          - name: changed_by_brand
+            data_type: boolean
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: product_id
+            data_type: bigint
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: aditional_value
+            data_type: double
+            description: ""
+          - name: order_id
+            data_type: bigint
+            description: ""
+          - name: promotional
+            data_type: boolean
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_order_status_logs
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: user_id
+            data_type: bigint
+            description: ""
+          - name: order_status_id
+            data_type: bigint
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: order_id
+            data_type: bigint
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_order_statuses
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: priority_package
+            data_type: bigint
+            description: ""
+          - name: color
+            data_type: string
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: translated_name
+            data_type: string
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: time_hours_sla
+            data_type: double
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: priority
+            data_type: bigint
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_orders
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: reshipping_id
+            data_type: bigint
+            description: ""
+          - name: city
+            data_type: string
+            description: ""
+          - name: origin_checkout
+            data_type: string
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: link
+            data_type: string
+            description: ""
+          - name: discount
+            data_type: double
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: is_pendency_status_order
+            data_type: bigint
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: payment_link
+            data_type: string
+            description: ""
+          - name: cep
+            data_type: string
+            description: ""
+          - name: interest_amount
+            data_type: double
+            description: ""
+          - name: shipping
+            data_type: double
+            description: ""
+          - name: coupon_id
+            data_type: bigint
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: dependent_id
+            data_type: bigint
+            description: ""
+          - name: installments
+            data_type: bigint
+            description: ""
+          - name: original_date
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: street
+            data_type: string
+            description: ""
+          - name: delivery_forecast
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: customer_interest
+            data_type: boolean
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: state
+            data_type: string
+            description: ""
+          - name: drc_id
+            data_type: bigint
+            description: ""
+          - name: deal_id
+            data_type: bigint
+            description: ""
+          - name: complement
+            data_type: string
+            description: ""
+          - name: loss_reason_id
+            data_type: bigint
+            description: ""
+          - name: amount
+            data_type: double
+            description: ""
+          - name: prescriber_id
+            data_type: bigint
+            description: ""
+          - name: medical_rectification_id
+            data_type: bigint
+            description: ""
+          - name: representative_discount
+            data_type: double
+            description: ""
+          - name: carriers
+            data_type: string
+            description: ""
+          - name: anvisa_rectification_id
+            data_type: bigint
+            description: ""
+          - name: tracking_code
+            data_type: string
+            description: ""
+          - name: changed_by_brand
+            data_type: boolean
+            description: ""
+          - name: address_number
+            data_type: string
+            description: ""
+          - name: merged_documents_link
+            data_type: string
+            description: ""
+          - name: is_vinculo_doc_required
+            data_type: boolean
+            description: ""
+          - name: shipping_discount
+            data_type: double
+            description: ""
+          - name: user_id
+            data_type: bigint
+            description: ""
+          - name: installment_value
+            data_type: double
+            description: ""
+          - name: patient_id
+            data_type: bigint
+            description: ""
+          - name: scheduling_order_id
+            data_type: bigint
+            description: ""
+          - name: district
+            data_type: string
+            description: ""
+          - name: cannect_user_id
+            data_type: bigint
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_payments
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: charge_interest
+            data_type: boolean
+            description: ""
+          - name: seller_takes_chargeback
+            data_type: boolean
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: origin_id
+            data_type: bigint
+            description: ""
+          - name: seller_receives_shipping
+            data_type: boolean
+            description: ""
+          - name: payment_account_id
+            data_type: bigint
+            description: ""
+          - name: shipping
+            data_type: double
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: payload
+            data_type: string
+            description: ""
+          - name: installments
+            data_type: bigint
+            description: ""
+          - name: soft_descriptor
+            data_type: string
+            description: ""
+          - name: supplier
+            data_type: double
+            description: ""
+          - name: commission
+            data_type: double
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: monthly_interest_rate
+            data_type: double
+            description: ""
+          - name: drc_id
+            data_type: bigint
+            description: ""
+          - name: seller_pays_transaction_costs
+            data_type: boolean
+            description: ""
+          - name: maximum_installments
+            data_type: bigint
+            description: ""
+          - name: amount
+            data_type: double
+            description: ""
+          - name: method
+            data_type: string
+            description: ""
+          - name: seller_account_id
+            data_type: string
+            description: ""
+          - name: processor
+            data_type: string
+            description: ""
+          - name: origin_type
+            data_type: string
+            description: ""
+          - name: minimum_installable_amount
+            data_type: double
+            description: ""
+          - name: processor_transaction_id
+            data_type: string
+            description: ""
+          - name: scheduling_order_id
+            data_type: bigint
+            description: ""
+          - name: payment_processor
+            data_type: double
+            description: ""
+          - name: minimum_installment_value
+            data_type: double
+            description: ""
+          - name: order_id
+            data_type: bigint
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_people
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: birthday
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: whatsapp
+            data_type: string
+            description: ""
+          - name: newsletter
+            data_type: boolean
+            description: ""
+          - name: gender
+            data_type: string
+            description: ""
+          - name: address_complement
+            data_type: string
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: botmaker_chatid
+            data_type: string
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: gender_identity
+            data_type: string
+            description: ""
+          - name: responsable_type
+            data_type: string
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: personal_address
+            data_type: string
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: personal_address_district
+            data_type: string
+            description: ""
+          - name: personal_cep
+            data_type: string
+            description: ""
+          - name: personal_address_number
+            data_type: string
+            description: ""
+          - name: cpf
+            data_type: string
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: drc_id
+            data_type: bigint
+            description: ""
+          - name: email
+            data_type: string
+            description: ""
+          - name: personal_address_state
+            data_type: string
+            description: ""
+          - name: responsable
+            data_type: string
+            description: ""
+          - name: rne
+            data_type: string
+            description: ""
+          - name: nationality
+            data_type: string
+            description: ""
+          - name: phone_residencial
+            data_type: string
+            description: ""
+          - name: rg
+            data_type: string
+            description: ""
+          - name: phone
+            data_type: string
+            description: ""
+          - name: user_id
+            data_type: bigint
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: personal_address_city
+            data_type: string
+            description: ""
+          - name: preferred_name
+            data_type: string
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_prescribers
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: representative_id
+            data_type: bigint
+            description: ""
+          - name: responsible_id
+            data_type: bigint
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: nr_council
+            data_type: string
+            description: ""
+          - name: uf_council
+            data_type: string
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: accept_pharmaceutical_support
+            data_type: boolean
+            description: ""
+          - name: representative_first_visit
+            data_type: struct<member0:date,member1:string>
+            description: ""
+          - name: interest_in_being_listed
+            data_type: boolean
+            description: ""
+          - name: online_appointment_value
+            data_type: bigint
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: scheduling_email
+            data_type: string
+            description: ""
+          - name: scheduling_user_id
+            data_type: string
+            description: ""
+          - name: already_prescribed
+            data_type: string
+            description: ""
+          - name: interval_between_appointments
+            data_type: bigint
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: logo_position
+            data_type: string
+            description: ""
+          - name: accept_cannect_cuida
+            data_type: boolean
+            description: ""
+          - name: pix
+            data_type: string
+            description: ""
+          - name: return_period
+            data_type: bigint
+            description: ""
+          - name: nr_rqe
+            data_type: string
+            description: ""
+          - name: pagar_me_id
+            data_type: string
+            description: ""
+          - name: situation_cfm_id
+            data_type: bigint
+            description: ""
+          - name: professional_name
+            data_type: string
+            description: ""
+          - name: secretary_name
+            data_type: string
+            description: ""
+          - name: photo
+            data_type: string
+            description: ""
+          - name: clinic_logo
+            data_type: string
+            description: ""
+          - name: type_subscription_cfm_id
+            data_type: bigint
+            description: ""
+          - name: biography
+            data_type: string
+            description: ""
+          - name: origin_brand
+            data_type: string
+            description: ""
+          - name: secretary_email
+            data_type: string
+            description: ""
+          - name: dr_cannabis_registration_date
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: secretary_phone
+            data_type: string
+            description: ""
+          - name: appointment_duration
+            data_type: bigint
+            description: ""
+          - name: listed
+            data_type: boolean
+            description: ""
+          - name: user_id
+            data_type: bigint
+            description: ""
+          - name: online_appointment
+            data_type: boolean
+            description: ""
+          - name: council
+            data_type: string
+            description: ""
+          - name: lead_origin_id
+            data_type: bigint
+            description: ""
+          - name: return_visit_value
+            data_type: bigint
+            description: ""
+          - name: origin_clinic
+            data_type: string
+            description: ""
+          - name: include_return_visit
+            data_type: boolean
+            description: ""
+          - name: onboarding_date
+            data_type: struct<member0:date,member1:string>
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_products
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: original_price
+            data_type: double
+            description: ""
+          - name: original_currency
+            data_type: string
+            description: ""
+          - name: cannect_choice
+            data_type: boolean
+            description: ""
+          - name: free_shipping
+            data_type: boolean
+            description: ""
+          - name: class_id
+            data_type: bigint
+            description: ""
+          - name: subclass_id
+            data_type: bigint
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: route_of_administration_id
+            data_type: bigint
+            description: ""
+          - name: average_cost
+            data_type: double
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: main_product_id
+            data_type: bigint
+            description: ""
+          - name: sku_item_of_kit
+            data_type: bigint
+            description: ""
+          - name: status_assistant
+            data_type: string
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: quantity_item
+            data_type: bigint
+            description: ""
+          - name: translated_name
+            data_type: string
+            description: ""
+          - name: price
+            data_type: double
+            description: ""
+          - name: reserved_stock
+            data_type: double
+            description: ""
+          - name: stock_in_tiny
+            data_type: bigint
+            description: ""
+          - name: details
+            data_type: string
+            description: ""
+          - name: currency
+            data_type: string
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: stock
+            data_type: double
+            description: ""
+          - name: weight
+            data_type: bigint
+            description: ""
+          - name: brand_id
+            data_type: bigint
+            description: ""
+          - name: flavor_id
+            data_type: bigint
+            description: ""
+          - name: shape_id
+            data_type: bigint
+            description: ""
+          - name: distributor_id
+            data_type: bigint
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: status_b2_b
+            data_type: string
+            description: ""
+          - name: codigo_tiny
+            data_type: bigint
+            description: ""
+          - name: supplier_id
+            data_type: bigint
+            description: ""
+          - name: country_id
+            data_type: bigint
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
+      - name: cn_users
+        description: ""
+        columns:
+          - name: _airbyte_ab_id
+            data_type: string
+            description: ""
+          - name: _airbyte_emitted_at
+            data_type: timestamp
+            description: ""
+          - name: accepted_terms_of_use_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: is_random_opportunities
+            data_type: bigint
+            description: ""
+          - name: nr_council
+            data_type: string
+            description: ""
+          - name: uf_council
+            data_type: string
+            description: ""
+          - name: created_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: appointment
+            data_type: boolean
+            description: ""
+          - name: comission_rate
+            data_type: double
+            description: ""
+          - name: expertise
+            data_type: string
+            description: ""
+          - name: uuid
+            data_type: string
+            description: ""
+          - name: registration_type
+            data_type: bigint
+            description: ""
+          - name: reset_password_token
+            data_type: string
+            description: ""
+          - name: integrated
+            data_type: boolean
+            description: ""
+          - name: health_insurance
+            data_type: boolean
+            description: ""
+          - name: password
+            data_type: string
+            description: ""
+          - name: updated_at
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: admission_date
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: cpf
+            data_type: string
+            description: ""
+          - name: reset_password_expires
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: id
+            data_type: bigint
+            description: ""
+          - name: drc_id
+            data_type: bigint
+            description: ""
+          - name: email
+            data_type: string
+            description: ""
+          - name: prescriber
+            data_type: boolean
+            description: ""
+          - name: listed_prescriber
+            data_type: boolean
+            description: ""
+          - name: address
+            data_type: string
+            description: ""
+          - name: rne
+            data_type: string
+            description: ""
+          - name: photo
+            data_type: string
+            description: ""
+          - name: biography
+            data_type: string
+            description: ""
+          - name: brand_id
+            data_type: bigint
+            description: ""
+          - name: refresh_token
+            data_type: string
+            description: ""
+          - name: phone
+            data_type: string
+            description: ""
+          - name: online_appointment
+            data_type: boolean
+            description: ""
+          - name: council
+            data_type: string
+            description: ""
+          - name: profile_id
+            data_type: bigint
+            description: ""
+          - name: organization_id
+            data_type: bigint
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: appointment_value
+            data_type: bigint
+            description: ""
+          - name: onboarding_date
+            data_type: struct<member0:date,member1:string>
+            description: ""
+          - name: _airbyte_additional_properties
+            data_type: map<string,string>
+            description: ""
+          - name: year
+            data_type: string
+            description: ""
+          - name: month
+            data_type: string
+            description: ""
+          - name: day
+            data_type: string
+            description: ""
+          - name: hour
+            data_type: string
+            description: ""
+
       - name: pagarme_chargebacks
         description: ""
         columns:
