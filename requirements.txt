@@ -9,5 +9,6 @@ numpy==1.24.4
 pandas==2.1.4
 python-dateutil==2.8.2
 awswrangler==3.7.3
+
 apache-airflow-providers-slack==8.5.1
 apache-airflow-providers-amazon==8.20.0

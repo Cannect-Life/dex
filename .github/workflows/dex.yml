@@ -120,4 +120,37 @@ jobs:
       - name: Update requirements file
         run: |
           echo -e "--find-links /usr/local/airflow/plugins\n--no-index\n\n$(cat ./requirements.txt)" > airflow/requirements.txt
-          aws s3 cp airflow/requirements.txt s3://${{ secrets.S3_BUCKET }}/requirements.txt  
+          aws s3 cp airflow/requirements.txt s3://${{ secrets.S3_BUCKET }}/requirements.txt
+
+  update_mwaa_environment:
+    runs-on: ubuntu-latest
+
+    needs: [changes, deploy_plugins, update_requirements_deps_reference]
+    if: ${{ needs.changes.outputs.requirements == 'true' }} || ${{ needs.changes.outputs.plugins == 'true' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.MWAA_DAG_AUTOMATION_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.MWAA_DAG_AUTOMATION_SECRET_KEY }}
+          aws-region: us-east-2
+
+      - name: Get S3 Object Version for Requirements
+        id: req_version
+        run: |
+          version=$(aws s3api head-object --bucket ${{ secrets.S3_BUCKET }} --key requirements.txt --query VersionId --output text)
+          echo "req_version=$version" >> $GITHUB_OUTPUT
+
+      - name: Get S3 Object Version for Plugins
+        id: plugins_version
+        run: |
+          version=$(aws s3api head-object --bucket ${{ secrets.S3_BUCKET }} --key plugins.zip --query VersionId --output text)
+          echo "plugins_version=$version" >> $GITHUB_OUTPUT
+
+      - name: Update MWAA Environment
+        run: |
+          aws mwaa update-environment --name ${{ vars.MWAA_ENV_NAME }} --source-bucket-arn "arn:aws:s3:::${{ secrets.S3_BUCKET }}" --plugins-s3-object-version ${{ steps.plugins_version.outputs.plugins_version }} --requirements-s3-object-version ${{ steps.req_version.outputs.req_version }}
