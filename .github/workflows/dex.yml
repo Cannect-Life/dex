@@ -106,7 +106,7 @@ jobs:
 
   update_requirements_deps_reference:
     needs: [build_plugins, changes]
-    if: ${{ needs.changes.outputs.requirements == 'true' }}
+    if: ${{ needs.changes.outputs.requirements == 'true' }} || ${{ needs.changes.outputs.plugins == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
