@@ -1,0 +1,26 @@
+VALID_DATATYPES = [
+    "boolean",
+    "tinyint",
+    "smallint",
+    "int",
+    "integer",
+    "bigint",
+    "float",
+    "double",
+    "decimal(38,2)",
+    "decimal(38,4)",
+    "decimal(38,6)",
+    "decimal(38,8)",
+    "string",
+    "char",
+    "varchar",
+    "binary",
+    "date",
+    "timestamp",
+
+    ## For the datatypes below, use "string"
+    # "array",
+    # "map",
+    # "struct",
+    # "union",
+]
