@@ -406,7 +406,7 @@ def data_ingestion_pagarme():
                     RoleSessionName='cannect_session'
                 )
                 
-                credentials = assumed_role['Credentials']
+                credentials = sts_client['Credentials']
                 access_key = credentials['AccessKeyId']
                 secret_key = credentials['SecretAccessKey']
                 session_token = credentials['SessionToken']
