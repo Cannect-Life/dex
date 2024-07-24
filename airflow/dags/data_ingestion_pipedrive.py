@@ -24,8 +24,8 @@ accounts = [
     "cannect"
 ]
 
-date_start = "{{ macros.ds_add(ds, 0) }}"
-date_end = "{{ macros.ds_add(ds, 1) }}"
+date_start = "{{ macros.ds_add(ds, 0) }} 00:00:00"
+date_end = "{{ macros.ds_add(ds, 1) }} 00:00:00"
 
 extractions = {
     "activities": {
