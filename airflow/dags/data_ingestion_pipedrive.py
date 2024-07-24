@@ -24,6 +24,9 @@ accounts = [
     "cannect"
 ]
 
+date_start = "{{ macros.ds_add(ds, 0) }}"
+date_end = "{{ macros.ds_add(ds, 1) }}"
+
 extractions = {
     "activities": {
         "request_url": "https://api.pipedrive.com/v1/activities/collection",
