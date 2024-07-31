@@ -19,11 +19,11 @@ sources:
           - name: _airbyte_emitted_at
             data_type: timestamp
             description: ""
-          - name: drops_per_milliliter
-            data_type: double
-            description: ""
-          - name: updated_at
+          - name: createdat
             data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: anvisa_name
+            data_type: string
             description: ""
           - name: distributor_id
             data_type: bigint
@@ -31,8 +31,8 @@ sources:
           - name: name
             data_type: string
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
+          - name: dropspermilliliter
+            data_type: double
             description: ""
           - name: id
             data_type: bigint
@@ -42,6 +42,9 @@ sources:
             description: ""
           - name: status
             data_type: string
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: _airbyte_additional_properties
             data_type: map<string,string>
@@ -68,6 +71,12 @@ sources:
           - name: _airbyte_emitted_at
             data_type: timestamp
             description: ""
+          - name: unitprice
+            data_type: double
+            description: ""
+          - name: find_by_ocr
+            data_type: bigint
+            description: ""
           - name: amount
             data_type: double
             description: ""
@@ -80,14 +89,8 @@ sources:
           - name: discount
             data_type: double
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: promotion_id
             data_type: bigint
-            description: ""
-          - name: unit_price
-            data_type: double
             description: ""
           - name: discount_type
             data_type: string
@@ -101,7 +104,7 @@ sources:
           - name: changed_by_brand
             data_type: boolean
             description: ""
-          - name: updated_at
+          - name: createdat
             data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: product_id
@@ -118,6 +121,9 @@ sources:
             description: ""
           - name: promotional
             data_type: boolean
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: _airbyte_additional_properties
             data_type: map<string,string>
@@ -144,7 +150,7 @@ sources:
           - name: _airbyte_emitted_at
             data_type: timestamp
             description: ""
-          - name: updated_at
+          - name: createdat
             data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: user_id
@@ -153,14 +159,14 @@ sources:
           - name: order_status_id
             data_type: bigint
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: id
             data_type: bigint
             description: ""
           - name: order_id
             data_type: bigint
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: _airbyte_additional_properties
             data_type: map<string,string>
@@ -190,11 +196,11 @@ sources:
           - name: priority_package
             data_type: bigint
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: color
             data_type: string
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: translated_name
             data_type: string
@@ -205,14 +211,14 @@ sources:
           - name: time_hours_sla
             data_type: double
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: id
             data_type: bigint
             description: ""
           - name: priority
             data_type: bigint
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: _airbyte_additional_properties
             data_type: map<string,string>
@@ -245,9 +251,6 @@ sources:
           - name: city
             data_type: string
             description: ""
-          - name: origin_checkout
-            data_type: string
-            description: ""
           - name: origin
             data_type: string
             description: ""
@@ -257,16 +260,13 @@ sources:
           - name: discount
             data_type: double
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
-          - name: is_pendency_status_order
-            data_type: bigint
+          - name: paymentlink
+            data_type: string
             description: ""
           - name: uuid
             data_type: string
             description: ""
-          - name: payment_link
+          - name: mergeddocumentslink
             data_type: string
             description: ""
           - name: cep
@@ -275,14 +275,14 @@ sources:
           - name: interest_amount
             data_type: double
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: shipping
             data_type: double
             description: ""
           - name: coupon_id
             data_type: bigint
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: dependent_id
             data_type: bigint
@@ -290,8 +290,11 @@ sources:
           - name: installments
             data_type: bigint
             description: ""
-          - name: original_date
-            data_type: struct<member0:timestamp,member1:string>
+          - name: isvinculodocrequired
+            data_type: boolean
+            description: ""
+          - name: ispendencystatusorder
+            data_type: bigint
             description: ""
           - name: street
             data_type: string
@@ -308,9 +311,6 @@ sources:
           - name: state
             data_type: string
             description: ""
-          - name: drc_id
-            data_type: bigint
-            description: ""
           - name: deal_id
             data_type: bigint
             description: ""
@@ -320,6 +320,9 @@ sources:
           - name: loss_reason_id
             data_type: bigint
             description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: amount
             data_type: double
             description: ""
@@ -327,6 +330,9 @@ sources:
             data_type: bigint
             description: ""
           - name: medical_rectification_id
+            data_type: bigint
+            description: ""
+          - name: drcid
             data_type: bigint
             description: ""
           - name: representative_discount
@@ -338,6 +344,9 @@ sources:
           - name: anvisa_rectification_id
             data_type: bigint
             description: ""
+          - name: origincheckout
+            data_type: string
+            description: ""
           - name: tracking_code
             data_type: string
             description: ""
@@ -346,15 +355,6 @@ sources:
             description: ""
           - name: address_number
             data_type: string
-            description: ""
-          - name: merged_documents_link
-            data_type: string
-            description: ""
-          - name: is_vinculo_doc_required
-            data_type: boolean
-            description: ""
-          - name: shipping_discount
-            data_type: double
             description: ""
           - name: user_id
             data_type: bigint
@@ -371,8 +371,14 @@ sources:
           - name: district
             data_type: string
             description: ""
+          - name: originaldate
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: cannect_user_id
             data_type: bigint
+            description: ""
+          - name: shippingdiscount
+            data_type: double
             description: ""
           - name: status
             data_type: string
@@ -411,9 +417,6 @@ sources:
           - name: origin
             data_type: string
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: origin_id
             data_type: bigint
             description: ""
@@ -423,11 +426,11 @@ sources:
           - name: payment_account_id
             data_type: bigint
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: shipping
             data_type: double
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: payload
             data_type: string
@@ -450,11 +453,11 @@ sources:
           - name: monthly_interest_rate
             data_type: double
             description: ""
-          - name: drc_id
-            data_type: bigint
-            description: ""
           - name: seller_pays_transaction_costs
             data_type: boolean
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: maximum_installments
             data_type: bigint
@@ -464,6 +467,9 @@ sources:
             description: ""
           - name: method
             data_type: string
+            description: ""
+          - name: drcid
+            data_type: bigint
             description: ""
           - name: seller_account_id
             data_type: string
@@ -541,9 +547,6 @@ sources:
           - name: botmaker_chatid
             data_type: string
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: gender_identity
             data_type: string
             description: ""
@@ -553,11 +556,11 @@ sources:
           - name: uuid
             data_type: string
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: personal_address
             data_type: string
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: personal_address_district
             data_type: string
@@ -574,17 +577,20 @@ sources:
           - name: id
             data_type: bigint
             description: ""
-          - name: drc_id
-            data_type: bigint
-            description: ""
           - name: email
             data_type: string
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: personal_address_state
             data_type: string
             description: ""
           - name: responsable
             data_type: string
+            description: ""
+          - name: drcid
+            data_type: bigint
             description: ""
           - name: rne
             data_type: string
@@ -656,11 +662,11 @@ sources:
           - name: uf_council
             data_type: string
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: uuid
             data_type: string
+            description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: accept_pharmaceutical_support
             data_type: boolean
@@ -673,9 +679,6 @@ sources:
             description: ""
           - name: online_appointment_value
             data_type: bigint
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: scheduling_email
             data_type: string
@@ -692,9 +695,6 @@ sources:
           - name: id
             data_type: bigint
             description: ""
-          - name: logo_position
-            data_type: string
-            description: ""
           - name: accept_cannect_cuida
             data_type: boolean
             description: ""
@@ -703,6 +703,9 @@ sources:
             description: ""
           - name: return_period
             data_type: bigint
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: nr_rqe
             data_type: string
@@ -748,6 +751,9 @@ sources:
             description: ""
           - name: listed
             data_type: boolean
+            description: ""
+          - name: logoposition
+            data_type: string
             description: ""
           - name: user_id
             data_type: bigint
@@ -819,8 +825,8 @@ sources:
           - name: subclass_id
             data_type: bigint
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
+          - name: status_b2b
+            data_type: string
             description: ""
           - name: route_of_administration_id
             data_type: bigint
@@ -831,6 +837,9 @@ sources:
           - name: uuid
             data_type: string
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: main_product_id
             data_type: bigint
             description: ""
@@ -840,9 +849,6 @@ sources:
           - name: status_assistant
             data_type: string
             description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: quantity_item
             data_type: bigint
             description: ""
@@ -850,9 +856,6 @@ sources:
             data_type: string
             description: ""
           - name: price
-            data_type: double
-            description: ""
-          - name: reserved_stock
             data_type: double
             description: ""
           - name: stock_in_tiny
@@ -868,6 +871,12 @@ sources:
             data_type: bigint
             description: ""
           - name: stock
+            data_type: double
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
+          - name: reservedstock
             data_type: double
             description: ""
           - name: weight
@@ -886,9 +895,6 @@ sources:
             data_type: bigint
             description: ""
           - name: name
-            data_type: string
-            description: ""
-          - name: status_b2_b
             data_type: string
             description: ""
           - name: codigo_tiny
@@ -943,9 +949,6 @@ sources:
           - name: uf_council
             data_type: string
             description: ""
-          - name: created_at
-            data_type: struct<member0:timestamp,member1:string>
-            description: ""
           - name: appointment
             data_type: boolean
             description: ""
@@ -967,14 +970,14 @@ sources:
           - name: integrated
             data_type: boolean
             description: ""
+          - name: createdat
+            data_type: struct<member0:timestamp,member1:string>
+            description: ""
           - name: health_insurance
             data_type: boolean
             description: ""
           - name: password
             data_type: string
-            description: ""
-          - name: updated_at
-            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: admission_date
             data_type: struct<member0:timestamp,member1:string>
@@ -988,11 +991,11 @@ sources:
           - name: id
             data_type: bigint
             description: ""
-          - name: drc_id
-            data_type: bigint
-            description: ""
           - name: email
             data_type: string
+            description: ""
+          - name: updatedat
+            data_type: struct<member0:timestamp,member1:string>
             description: ""
           - name: prescriber
             data_type: boolean
@@ -1002,6 +1005,9 @@ sources:
             description: ""
           - name: address
             data_type: string
+            description: ""
+          - name: drcid
+            data_type: bigint
             description: ""
           - name: rne
             data_type: string
@@ -1508,6 +1514,609 @@ sources:
             description: ""
           - name: service_referer_name
             data_type: string
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_activities
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: done
+            data_type: boolean
+            description: ""
+          - name: type
+            data_type: string
+            description: ""
+          - name: duration
+            data_type: string
+            description: ""
+          - name: subject
+            data_type: string
+            description: ""
+          - name: company_id
+            data_type: string
+            description: ""
+          - name: user_id
+            data_type: string
+            description: ""
+          - name: conference_meeting_client
+            data_type: string
+            description: ""
+          - name: conference_meeting_url
+            data_type: string
+            description: ""
+          - name: conference_meeting_id
+            data_type: string
+            description: ""
+          - name: due_date
+            data_type: date
+            description: ""
+          - name: due_time
+            data_type: string
+            description: ""
+          - name: busy_flag
+            data_type: boolean
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: marked_as_done_time
+            data_type: timestamp
+            description: ""
+          - name: public_description
+            data_type: string
+            description: ""
+          - name: location
+            data_type: string
+            description: ""
+          - name: org_id
+            data_type: string
+            description: ""
+          - name: person_id
+            data_type: string
+            description: ""
+          - name: deal_id
+            data_type: string
+            description: ""
+          - name: active_flag
+            data_type: boolean
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: update_user_id
+            data_type: string
+            description: ""
+          - name: source_timezone
+            data_type: string
+            description: ""
+          - name: lead_id
+            data_type: string
+            description: ""
+          - name: location_subpremise
+            data_type: string
+            description: ""
+          - name: location_street_number
+            data_type: string
+            description: ""
+          - name: location_route
+            data_type: string
+            description: ""
+          - name: location_sublocality
+            data_type: string
+            description: ""
+          - name: location_locality
+            data_type: string
+            description: ""
+          - name: location_admin_area_level_1
+            data_type: string
+            description: ""
+          - name: location_admin_area_level_2
+            data_type: string
+            description: ""
+          - name: location_country
+            data_type: string
+            description: ""
+          - name: location_postal_code
+            data_type: string
+            description: ""
+          - name: location_formatted_address
+            data_type: string
+            description: ""
+          - name: project_id
+            data_type: string
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_deals
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: creator_user_id
+            data_type: string
+            description: ""
+          - name: user_id
+            data_type: string
+            description: ""
+          - name: person_id
+            data_type: string
+            description: ""
+          - name: org_id
+            data_type: string
+            description: ""
+          - name: stage_id
+            data_type: string
+            description: ""
+          - name: title
+            data_type: string
+            description: ""
+          - name: value
+            data_type: decimal(38,2)
+            description: ""
+          - name: currency
+            data_type: string
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: status
+            data_type: string
+            description: ""
+          - name: probability
+            data_type: float
+            description: ""
+          - name: lost_reason
+            data_type: string
+            description: ""
+          - name: visible_to
+            data_type: string
+            description: ""
+          - name: close_time
+            data_type: timestamp
+            description: ""
+          - name: pipeline_id
+            data_type: string
+            description: ""
+          - name: won_time
+            data_type: timestamp
+            description: ""
+          - name: lost_time
+            data_type: timestamp
+            description: ""
+          - name: expected_close_date
+            data_type: date
+            description: ""
+          - name: label
+            data_type: string
+            description: ""
+          - name: b5b9498932dc71a8118f2da664a0cfd7902867bd
+            data_type: string
+            description: ""
+          - name: da2d1b3bfdf907690f6f43496b163f06c51b2b55
+            data_type: string
+            description: ""
+          - name: d524a42bd0007f345a4f7200d5910d3b3b312b6f
+            data_type: string
+            description: ""
+          - name: 82788c5d30ed24c932350d768ea7003cae90692a
+            data_type: string
+            description: ""
+          - name: dbdbc251d0956168268be6d257fdf5f70d943d0b
+            data_type: string
+            description: ""
+          - name: a936bd02a3a1d92d21da5313c134a5468c060636
+            data_type: string
+            description: ""
+          - name: d57635742f9d303d2503211301cc7ea808a5f4ae
+            data_type: string
+            description: ""
+          - name: ea7eba83ca1cca4874dc60da35c279d385be9f5b
+            data_type: string
+            description: ""
+          - name: df5a662efbc0b9fbbc826febf97f29abfe9d0492
+            data_type: string
+            description: ""
+          - name: 6a9f6ccbc897bb9d1aa573fcd4162b219369ed32
+            data_type: string
+            description: ""
+          - name: 2c8eee7325bba9775937746a5d75c2b44bcdbc79
+            data_type: string
+            description: ""
+          - name: 3cbc5cd4ed812f8f870218fadb7ee10b13909b3c
+            data_type: string
+            description: ""
+          - name: a193bee1d74c0710d37ff40f9f4bb3b4ea3b2f98
+            data_type: string
+            description: ""
+          - name: 33f8d0539de650a87a92ed06126a0003d338bf18
+            data_type: string
+            description: ""
+          - name: 4cba8da34f945f6c9b316b48cd2ba906428f39ca
+            data_type: string
+            description: ""
+          - name: d4979f98528a7228d65d360c4654814d25264828
+            data_type: string
+            description: ""
+          - name: b0884a3b72f979693807b40c470df2dc940dc928
+            data_type: string
+            description: ""
+          - name: 9dd52c503bf964dbaebd59829063792f95026f10
+            data_type: string
+            description: ""
+          - name: 7eb4d88682206c2d9ee62996fddfc526ce51d57d
+            data_type: string
+            description: ""
+          - name: 0f1f5ee9c0672b03b238455166cf83dc0643405a
+            data_type: string
+            description: ""
+          - name: 99083d23442c5db60bcbdc8054c9b9ac4b669704
+            data_type: string
+            description: ""
+          - name: 64ba1c3fd45ef9b3c5d386118419cb24336198d9
+            data_type: string
+            description: ""
+          - name: efe71908c95d7f09646af46abe8def89caaf618f
+            data_type: string
+            description: ""
+          - name: 5f2657533cae503f82f40010fe00170bb2773192
+            data_type: string
+            description: ""
+          - name: 331214c70fc42307971f60defb1f15ee25b26d87
+            data_type: string
+            description: ""
+          - name: 496f2b7fe774d9c9c8c453f8c34f3bc1675f2bae
+            data_type: string
+            description: ""
+          - name: c975a8ede20c11aecaa1c91924959c92349afa28
+            data_type: string
+            description: ""
+          - name: 7dee75bf4a4cfa33b73187d92532a5bd648a2803
+            data_type: string
+            description: ""
+          - name: 35ea8d3d8c51f29f2a5555dc6bea1fd7401127b5
+            data_type: string
+            description: ""
+          - name: aa7b18fa8576385025c0479d21b2d70b947fca72
+            data_type: string
+            description: ""
+          - name: fb22307992deb23b0df58076d0b1f01d7cf07ace
+            data_type: string
+            description: ""
+          - name: 2c3800d4cbf6bac43ff9edc9c6ec3877dfe727d2
+            data_type: string
+            description: ""
+          - name: c6bf35da444cee2869970183edd5fe76218771f4
+            data_type: string
+            description: ""
+          - name: 5e9e9042d6ebf29a913f5732a5ab09762fd91ab3
+            data_type: string
+            description: ""
+          - name: f265b039cb73cb5a92064fa4cfb2542eccb612f1
+            data_type: string
+            description: ""
+          - name: 5d5983c4c766e01f6d53780f1e8059904338427e
+            data_type: string
+            description: ""
+          - name: 9dae906258b345b4017e179727a87687c432138a
+            data_type: string
+            description: ""
+          - name: 6d4a8e0e7fa6ebd19361b38988aedc5e30b1d33a
+            data_type: string
+            description: ""
+          - name: 227a016e655ca8888b6e1a5997152a87a0f5d52b
+            data_type: string
+            description: ""
+          - name: d32b5eea6ed8bfb931a5b2eb75db4a119cd77bbc
+            data_type: string
+            description: ""
+          - name: 177e9472d7c485237b9ff976512f5aefdc6670e5
+            data_type: string
+            description: ""
+          - name: 8e2dca4f09882b55e50adecb94fc3aaaa2a4f47e
+            data_type: string
+            description: ""
+          - name: 3ca31d0a1183370468a4e4a47b21dfc3776000fa
+            data_type: string
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_leadlabels
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: color
+            data_type: string
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_leads
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: title
+            data_type: string
+            description: ""
+          - name: owner_id
+            data_type: string
+            description: ""
+          - name: creator_id
+            data_type: string
+            description: ""
+          - name: label_ids
+            data_type: string
+            description: ""
+          - name: value
+            data_type: string
+            description: ""
+          - name: expected_close_date
+            data_type: date
+            description: ""
+          - name: person_id
+            data_type: string
+            description: ""
+          - name: organization_id
+            data_type: string
+            description: ""
+          - name: is_archived
+            data_type: boolean
+            description: ""
+          - name: source_name
+            data_type: string
+            description: ""
+          - name: origin
+            data_type: string
+            description: ""
+          - name: origin_id
+            data_type: string
+            description: ""
+          - name: channel
+            data_type: string
+            description: ""
+          - name: channel_id
+            data_type: string
+            description: ""
+          - name: was_seen
+            data_type: boolean
+            description: ""
+          - name: next_activity_id
+            data_type: string
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: 82788c5d30ed24c932350d768ea7003cae90692a
+            data_type: string
+            description: ""
+          - name: visible_to
+            data_type: string
+            description: ""
+          - name: cc_email
+            data_type: string
+            description: ""
+          - name: a936bd02a3a1d92d21da5313c134a5468c060636
+            data_type: string
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_persons
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: active_flag
+            data_type: boolean
+            description: ""
+          - name: owner_id
+            data_type: string
+            description: ""
+          - name: org_id
+            data_type: string
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: phone
+            data_type: string
+            description: ""
+          - name: email
+            data_type: string
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: delete_time
+            data_type: timestamp
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: visible_to
+            data_type: string
+            description: ""
+          - name: picture_id
+            data_type: string
+            description: ""
+          - name: label
+            data_type: string
+            description: ""
+          - name: cc_email
+            data_type: string
+            description: ""
+          - name: ed8eaa63b3394301a3a1780230dbd025aae41ca8
+            data_type: string
+            description: ""
+          - name: dfff467de90282c593ac261552a0d7f007794a48
+            data_type: string
+            description: ""
+          - name: c4c671048f3555df004ba83f2c2c06abd4679b9b
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_subpremise
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_street_number
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_route
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_sublocality
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_locality
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_admin_area_level_1
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_admin_area_level_2
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_country
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_postal_code
+            data_type: string
+            description: ""
+          - name: 27014d6246dd0088faef326de7082994311121ad_formatted_address
+            data_type: string
+            description: ""
+          - name: a3af369eb1efd353723a11d92a1003f84c582998
+            data_type: string
+            description: ""
+          - name: cffddce8f14f2423ed3a558f8c817a0aa61f58b8
+            data_type: string
+            description: ""
+          - name: ee5b30b55259391aea0473641af72a032c0653c2
+            data_type: string
+            description: ""
+          - name: ff86b40c382fb14ca918bc7bec6c0868b9a5bcac
+            data_type: string
+            description: ""
+          - name: 1805c1933b37a0d26a2237a4dbad2ee04d65ab8d
+            data_type: string
+            description: ""
+          - name: 629421c8a0f0d7cd5c407ba12841407de5c19a0e
+            data_type: string
+            description: ""
+          - name: 79c2ddbd89f18a1b1299bf73228de5063cbab6fb
+            data_type: string
+            description: ""
+          - name: f0fb06005caeeb1fdf60d0c4c17d852db85d12c9
+            data_type: string
+            description: ""
+          - name: partition_date
+            data_type: string
+            description: ""
+          - name: account
+            data_type: string
+            description: ""
+
+      - name: pipedrive_products
+        description: ""
+        columns:
+          - name: id
+            data_type: string
+            description: ""
+          - name: name
+            data_type: string
+            description: ""
+          - name: tax
+            data_type: decimal(38,2)
+            description: ""
+          - name: add_time
+            data_type: timestamp
+            description: ""
+          - name: update_time
+            data_type: timestamp
+            description: ""
+          - name: description
+            data_type: string
+            description: ""
+          - name: code
+            data_type: string
+            description: ""
+          - name: unit
+            data_type: string
+            description: ""
+          - name: owner_id
+            data_type: string
+            description: ""
+          - name: category
+            data_type: string
+            description: ""
+          - name: is_deleted
+            data_type: boolean
+            description: ""
+          - name: is_linkable
+            data_type: boolean
+            description: ""
+          - name: prices
+            data_type: string
+            description: ""
+          - name: custom_fields
+            data_type: string
+            description: ""
+          - name: visible_to
+            data_type: string
+            description: ""
+          - name: billing_frequency
+            data_type: string
+            description: ""
+          - name: billing_frequency_cycles
+            data_type: int
             description: ""
           - name: partition_date
             data_type: string
