@@ -64,7 +64,7 @@ extractions = {
     },
     "deals_products": {
         "request_url": "https://api.pipedrive.com/api/v2/deals/products",
-        "batch_iteration": {"param_name": "deal_ids", "content_function": get_deal_ids, "content_args": [aws_session, date_start, date_end], "batch_size": 100},
+        "batch_iteration": {"param_name": "deal_ids", "content_function": get_deals_ids, "content_args": [aws_session, date_start, date_end], "batch_size": 100},
         "params": {"limit": 500},
         "df_schema": deals_products_schema
     },
