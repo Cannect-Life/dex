@@ -136,7 +136,7 @@ def data_ingestion_pipedrive():
             def extract_data(extraction, extraction_info, api_token):
 
                 if extraction_info.get("batch_iteration"):
-                    extraction_info["content"] = extraction_info["content_function"](*extraction_info["content_args"])
+                    extraction_info["content"] = extraction_info["batch_iteration"]["content_function"](*extraction_info["batch_iteration"]["content_args"])
 
                 data = extract_pipedrive(extraction, extraction_info, api_token)
         
