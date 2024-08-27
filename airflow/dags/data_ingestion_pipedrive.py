@@ -169,7 +169,7 @@ def data_ingestion_pipedrive():
                 df_schema=extraction_info["df_schema"]
             )
         
-            write_data(
+            write_task = write_data(
                 df=df,
                 s3_path=f"{LANDING_PATH}/{extraction}",
                 database="landing",
