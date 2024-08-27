@@ -113,6 +113,8 @@ extractions = {
     },
 }
 
+task_dict = {}
+
 @dag(
     dag_id="data_ingestion_pipedrive",
     default_args=default_args,
