@@ -2,10 +2,19 @@ import time
 import requests
 import pandas as pd
 
+from itertools import islice
 from tenacity import retry, stop_after_attempt, wait_random, wait_exponential
 
 from dex_ingestor.utils import date_parse, apply_data_types
 
+
+def batch_iterable(iterable, batch_size):
+    it = iter(iterable)
+    while True:
+        batch = list(islice(it, batch_size))
+        if not batch:
+            break
+        yield batch
 
 def paginate_cursor(response):
 
@@ -31,16 +40,20 @@ def extract_pipedrive(extraction, extraction_info, api_token):
     extraction_config = {
         "activities": {"pagination_function": paginate_cursor},
         "deals": {"pagination_function": paginate_cursor},
+        "deals_products": {"pagination_function": paginate_cursor},
+        "deal_fields": {"pagination_function": paginate_limit},
         "persons": {"pagination_function": paginate_cursor},
         "products": {"pagination_function": paginate_cursor},
         "leads": {"pagination_function": paginate_limit},
         "leadLabels": {},
+        "organizations": {"pagination_function": paginate_limit},
+        "organization_fields": {"pagination_function": paginate_limit},
+        "stages": {"pagination_function": paginate_cursor},
     }
 
     pagination_function = extraction_config[extraction].get("pagination_function")
 
     request_url = extraction_info["request_url"]
-    params = extraction_info.get("params", {})
     min_record_date = None
     max_record_date = None
 
@@ -50,52 +63,74 @@ def extract_pipedrive(extraction, extraction_info, api_token):
         record_date_field = extraction_control.get("record_date_field")
         min_record_date = date_parse(extraction_control.get("min_record_date"))
         max_record_date = date_parse(extraction_control.get("max_record_date"))
+    
+    batch_iteration = extraction_info.get("batch_iteration", {})
+    iterable_items = ["dummy"]
+    batch_size = 100
+    batch_param = None
+    if batch_iteration:
+        iterable_items = batch_iteration["content"]
+        print(f"Iterating over {len(iterable_items)} items")
+        batch_size = batch_iteration["batch_size"]
+        batch_param = batch_iteration["param_name"]
 
     data = []
-    finished = False
-    page_counter = 1
+    batch_counter = 1
 
-    while not finished:
+    for items in batch_iterable(iterable_items, batch_size=batch_size):
 
-        print(f"Requesting page: {page_counter}")
+        print(f"Requesting batch: {batch_counter}")
 
-        response = get_pipedrive_data(request_url=request_url, api_token=api_token, params=params)
+        page_counter = 1
+        finished = False
+        params = extraction_info.get("params", {})
 
-        page_data = response["data"]
+        if batch_param:
+            params[batch_param] = ",".join(items)
 
-        if not page_data:
-            return data
+        while not finished:
 
-        if pagination_function:
-            finished, params_update = pagination_function(response)
-            params.update(params_update)
-        else:
-            print("Unpaginated extraction")
-            finished = True
+            print(f"Requesting page: {page_counter}")
 
-        if max_record_date:
-            page_data = [
-                r
-                for r in page_data
-                if date_parse(r[record_date_field]) <= max_record_date
-            ]
+            response = get_pipedrive_data(request_url=request_url, api_token=api_token, params=params)
 
-        if min_record_date:
-            last_record = page_data[-1]
-            if date_parse(last_record[record_date_field]) < min_record_date:
+            page_data = response["data"]
+
+            if not page_data:
+                break
+
+            if pagination_function:
+                finished, params_update = pagination_function(response)
+                params.update(params_update)
+            else:
+                print("Unpaginated extraction")
                 finished = True
 
-            page_data = [
-                r
-                for r in page_data
-                if date_parse(r[record_date_field]) >= min_record_date
-            ]
+            if max_record_date:
+                page_data = [
+                    r
+                    for r in page_data
+                    if date_parse(r[record_date_field]) <= max_record_date
+                ]
 
-        data.extend(page_data)
+            if min_record_date and page_data:
+                last_record = page_data[-1]
+                if date_parse(last_record[record_date_field]) < min_record_date:
+                    finished = True
 
-        print(f"Fetched {len(page_data)} deals, total: {len(data)}")
+                page_data = [
+                    r
+                    for r in page_data
+                    if date_parse(r[record_date_field]) >= min_record_date
+                ]
 
-        page_counter += 1
+            data.extend(page_data)
+
+            print(f"Fetched {len(page_data)} deals, total: {len(data)}")
+
+            page_counter += 1
+        
+        batch_counter += 1
 
     return data
 
@@ -141,66 +176,3 @@ def create_pipedrive_df(data, partition_date, account, df_schema):
     df = apply_data_types(df, df_schema)
 
     return df
-
-if __name__ == '__main__':
-
-    import pandas as pd
-    from dex_ingestor.connectors.pipedrive.endpoint_schemas import *
-
-    pd.set_option("display.max_columns", None)
-    pd.set_option("display.max_colwidth", 100)
-
-    api_token = "<FILL ME>"
-
-    date_start = None
-    date_end = None
-
-    date_start = "2024-07-01 00:00:00"
-    date_end = "2024-07-24 00:00:00"
-
-    extractions = {
-        "activities": {
-            "request_url": "https://api.pipedrive.com/v1/activities/collection",
-            "params": {"limit": 500, "since": date_start, "until": date_end},
-            "df_schema": activities_schema
-        },
-        "deals": {
-            "request_url": "https://api.pipedrive.com/v1/deals/collection",
-            "params": {"limit": 500, "since": date_start, "until": date_end},
-            "df_schema": deals_schema
-        },
-        "persons": {
-            "request_url": "https://api.pipedrive.com/v1/persons/collection",
-            "params": {"limit": 500, "since": date_start, "until": date_end},
-            "df_schema": persons_schema
-        },
-        "products": {
-            "request_url": "https://api.pipedrive.com/api/v2/products",
-            "params": {"limit": 500, "sort_by": "update_time", "sort_direction": "desc"},
-            "extraction_control": {
-                "record_date_field": "update_time",
-                "min_record_date": date_start,
-                "max_record_date": date_end,
-            },
-            "df_schema": products_schema
-        },
-        "leads": {
-            "request_url": "https://api.pipedrive.com/v1/leads",
-            "params": {"limit": 500, "sort": "update_time DESC"},
-            "extraction_control": {
-                "record_date_field": "update_time",
-                "min_record_date": date_start,
-                "max_record_date": date_end,
-            },
-            "df_schema": leads_schema
-        },
-        "leadLabels": {"request_url": "https://api.pipedrive.com/v1/leadLabels", "df_schema": lead_labels_schema},
-    }
-
-    for extraction, extraction_info in extractions.items():
-        print(extraction)
-        data = extract_pipedrive(extraction, extraction_info, api_token)
-        print(len(data))
-        df = create_pipedrive_df(data=data, partition_date="test", account="test", df_schema=extraction_info["df_schema"])
-        print(df.head(2))
-        print("----------------------------------------------------------")

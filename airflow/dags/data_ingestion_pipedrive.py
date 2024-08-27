@@ -8,6 +8,7 @@ from airflow.providers.amazon.aws.hooks.base_aws import AwsBaseHook
 
 from dex_ingestor.connectors.pipedrive.api import extract_pipedrive, create_pipedrive_df
 from dex_ingestor.connectors.pipedrive.endpoint_schemas import *
+from dex_ingestor.athena.reader import read_data_from_athena
 from dex_ingestor.athena.writer import write_pandas_to_table
 from dex_ingestor.utils import task_fail_alert
 
@@ -27,6 +28,29 @@ accounts = [
 date_start = "{{ macros.ds_add(ds, 0) }} 00:00:00"
 date_end = "{{ macros.ds_add(ds, 1) }} 00:00:00"
 
+aws_hook = AwsBaseHook(aws_conn_id='aws_cannect')
+aws_session = aws_hook.get_session()
+
+def get_deals_ids(aws_session, date_start, date_end):
+            
+    query = f"""
+    select distinct
+        id
+    from
+        landing.pipedrive_deals
+    where
+        date(update_time) >= date('{date_start[:10]}')
+        and date(update_time) < date('{date_end[:10]}')
+    """
+
+    print(query)
+
+    ids = read_data_from_athena(query=query, aws_session=aws_session, s3_output="s3://cannect-athena-results-68203827/ingestion/")
+
+    ids = [r["id"] for r in ids]
+
+    return ids
+
 extractions = {
     "activities": {
         "request_url": "https://api.pipedrive.com/v1/activities/collection",
@@ -37,6 +61,16 @@ extractions = {
         "request_url": "https://api.pipedrive.com/v1/deals/collection",
         "params": {"limit": 500, "since": date_start, "until": date_end},
         "df_schema": deals_schema
+    },
+    "deals_products": {
+        "request_url": "https://api.pipedrive.com/api/v2/deals/products",
+        "batch_iteration": {"param_name": "deal_ids", "content_function": get_deal_ids, "content_args": [aws_session, date_start, date_end], "batch_size": 100},
+        "params": {"limit": 500},
+        "df_schema": deals_products_schema
+    },
+    "deal_fields": {
+        "request_url": "https://api.pipedrive.com/v1/dealFields",
+        "df_schema": deal_fields_schema
     },
     "persons": {
         "request_url": "https://api.pipedrive.com/v1/persons/collection",
@@ -64,10 +98,20 @@ extractions = {
         "df_schema": leads_schema
     },
     "leadLabels": {"request_url": "https://api.pipedrive.com/v1/leadLabels", "df_schema": lead_labels_schema},
+    "organizations": {
+        "request_url": "https://api.pipedrive.com/v1/organizations",
+        "df_schema": organizations_schema
+    },
+    "organization_fields": {
+        "request_url": "https://api.pipedrive.com/v1/organizationFields",
+        "df_schema": organization_fields_schema
+    },
+    "stages": {
+        "request_url": "https://api.pipedrive.com/api/v2/stages",
+        "params": {"limit": 500},
+        "df_schema": stages_schema
+    },
 }
-
-aws_hook = AwsBaseHook(aws_conn_id='aws_cannect')
-aws_session = aws_hook.get_session()
 
 @dag(
     dag_id="data_ingestion_pipedrive",
@@ -86,9 +130,11 @@ def data_ingestion_pipedrive():
 
         for extraction, extraction_info in extractions.items():
 
-
             @task(task_id=f"extract_data_{extraction}_{account}")
             def extract_data(extraction, extraction_info, api_token):
+
+                if extraction_info.get("batch_iteration"):
+                    extraction_info["content"] = extraction_info["content_function"](*extraction_info["content_args"])
 
                 data = extract_pipedrive(extraction, extraction_info, api_token)
         
@@ -133,6 +179,11 @@ def data_ingestion_pipedrive():
                 mode="overwrite_partitions",
                 partition_cols=["partition_date", "account"]
             )
+
+            task_dict[f"write_data_{extraction}_{account}"] = write_task
+            task_dict[f"extract_data_{extraction}_{account}"] = data
+
+        task_dict[f"write_data_deals_{account}"] >> task_dict[f"extract_data_deals_products_{account}"]
 
 
 data_ingestion_pipedrive = data_ingestion_pipedrive()
